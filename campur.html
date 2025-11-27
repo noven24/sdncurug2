@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website SDN Curug 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+        --bs-primary: #28a745;
+        --bs-secondary: #0d6efd;
+        --bs-primary-rgb: 40, 167, 69;
+        --bs-secondary-rgb: 13, 110, 253;
+        --bs-body-font-family: 'Inter', sans-serif;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-primary {
+        background: linear-gradient(135deg, var(--bs-primary) 0%, var(--bs-secondary) 100%);
+        }
+        .gradient-accent {
+        background: linear-gradient(135deg, #fd7e14 0%, var(--bs-primary) 100%);
+        }
+        .gradient-vibrant {
+        background: linear-gradient(135deg, #20c997 0%, #0dcaf0 50%, #fd7e14 100%);
+        }
+        .nav-color{
+            background-color: #206ef3;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('gedung.jpg') no-repeat center center/cover;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        /* Animation for elements on scroll */
+        .reveal {
+            position: relative;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 1s all ease;
+        }
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        /* Hide scrollbar for carousel */
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel-container {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* ========== HOVER ANIMATIONS ========== */
+        
+        /* Navbar Link Hover */
+        .nav-link-hover {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link-hover::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #fbbf24;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link-hover:hover {
+            color: #fbbf24 !important;
+        }
+        
+        .nav-link-hover:hover::after {
+            width: 100%;
+        }
+        
+        /* Button Hover Effects */
+        .btn-hover-lift {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-hover-lift:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-hover-fill {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+        
+        .btn-hover-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: #1e40af;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn-hover-fill:hover {
+            color: white;
+        }
+        
+        .btn-hover-fill:hover::before {
+            width: 100%;
+        }
+        
+        /* Card Hover Effects */
+        .card-hover-3d {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-hover-3d:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-hover-glow {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover-glow:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            border-color: #3b82f6;
+        }
+        
+        .card-hover-image-zoom {
+            overflow: hidden;
+        }
+        
+        .card-hover-image-zoom img {
+            transition: transform 0.5s ease;
+        }
+        
+        .card-hover-image-zoom:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Icon Hover Effects */
+        .icon-hover-rotate {
+            transition: transform 0.3s ease;
+        }
+        
+        .icon-hover-rotate:hover {
+            transform: rotate(15deg);
+        }
+        
+        .icon-hover-pulse:hover {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Stats Counter Hover */
+        .stat-hover {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .stat-hover:hover::before {
+            left: 100%;
+        }
+        
+        .stat-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Testimonial Hover */
+        .testimonial-hover {
+            transition: all 0.4s ease;
+        }
+        
+        .testimonial-hover:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Footer Link Hover */
+        .footer-link-hover {
+            position: relative;
+            transition: all 0.3s ease;
+            padding-left: 0;
+        }
+        
+        .footer-link-hover::before {
+            content: '›';
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link-hover:hover {
+            padding-left: 15px;
+            color: #60a5fa !important;
+        }
+        
+        .footer-link-hover:hover::before {
+            opacity: 1;
+            left: 0;
+        }
+        
+        /* Social Icon Hover */
+        .social-icon-hover {
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .social-icon-hover:hover {
+            transform: translateY(-3px);
+            background-color: #3b82f6;
+            color: white !important;
+        }
+        
+        /* Carousel Item Hover */
+        .carousel-item-hover {
+            transition: all 0.4s ease;
+        }
+        
+        .carousel-item-hover:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Contact Card Hover */
+        .contact-card-hover {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-card-hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            transition: height 0.3s ease;
+            z-index: -1;
+        }
+        
+        .contact-card-hover:hover {
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .contact-card-hover:hover::after {
+            height: 100%;
+        }
+        
+        .contact-card-hover:hover .contact-icon {
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header / Navbar -->
+    <header class="nav-color sticky top-0 z-50 shadow-md">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="campur.html" class="icon-hover-rotate">
+                <img src="logo-sd.png" alt="Logo SDN CURUG 2" class="h-10 md:h-12">
+            </a>
+            <!-- Nav Links (Desktop) -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="https://spmbkota.depok.go.id" class="text-sm font-medium text-white nav-link-hover">SPMB</a>
+                <a href="kegiatan.html" class="text-sm font-medium text-white nav-link-hover">Kegiatan</a>
+                <a href="galeri.html" class="text-sm font-medium text-white nav-link-hover">Galeri</a>
+                <a href="prestasi.html" class="text-sm font-medium text-white nav-link-hover">Prestasi</a>
+                <a href="ekskul.html" class="text-sm font-medium text-white nav-link-hover">Ekskul</a>
+                <a href="kontak.html" class="ml-4 px-4 py-2 bg-yellow-500 text-gray-800 text-sm font-medium rounded-full btn-hover-lift">
+                    Hubungi Kami
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-blue-700 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 border-t border-blue-400">
+            <a href="https://spmbkota.depok.go.id" class="block text-sm font-medium text-white py-2 hover:bg-blue-700 rounded px-2 transition-colors">SPMB</a>
+            <a href="kegiatan.html" class="block text-sm font-medium text-white py-2 hover:bg-blue-700 rounded px-2 transition-colors">Kegiatan</a>
+            <a href="prestasi.html" class="block text-sm font-medium text-white py-2 hover:bg-blue-700 rounded px-2 transition-colors">Prestasi</a>
+            <a href="#kontak" class="block w-full text-center mt-2 px-4 py-2 bg-yellow-500 text-gray-800 text-sm font-medium rounded-full btn-hover-lift">
+                Hubungi Kami
+            </a>
+        </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero-section h-screen flex items-center justify-center text-white text-center pt-20">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Selamat Datang di SDN CURUG 2 <br>CIMANGGIS DEPOK</h1>
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">Membentuk generasi cerdas, berakhlak mulia, dan siap menghadapi masa depan dengan pendidikan berkualitas dan lingkungan belajar yang nyaman.</p>
+            <div class="flex justify-center gap-4">
+                <a href="https://spmbkota.depok.go.id" class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-3 px-8 rounded-lg btn-hover-lift transition duration-300">Daftar Sekarang</a>
+                <a href="#" class="bg-white hover:bg-gray-200 text-gray-800 font-bold py-3 px-8 rounded-lg btn-hover-lift transition duration-300">Lihat Sekolah</a>
+            </div>
+        </div>
+        <div class="absolute bottom-5 animate-bounce icon-hover-pulse">
+            <span class="text-sm">SCROLL</span>
+            <i class="fas fa-arrow-down ml-2"></i>
+        </div>
+    </section>
+    <!-- Main Content -->
+    <main class="container mx-auto px-6">
+    <!-- Profile Section -->
+    <section id="profile" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-9"> 
+                    <h2 class="display-5 fw-bold text-dark text-center mb-4">
+                    PROFILE SDN CURUG 2 CIMANGGIS DEPOK
+                    </h2>
+                    <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow-lg mb-5 card-hover-glow">
+                    <iframe src="https://www.youtube.com/embed/-_7V6Jb08Jg?si=Oi9LA0K69DlQXUrK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-2 border-light-subtle shadow-sm card-hover-3d">
+                        <div class="card-body p-4 p-lg-5 text-center">
+                            <div class="d-flex align-items-center justify-content-center rounded-circle gradient-primary text-white mb-4 icon-hover-rotate" style="width: 64px; height: 64px;">
+                                <i class="bi bi-bullseye fs-2"></i>
+                            </div>
+                            <h3 class="h4 fw-bold mb-3">Visi</h3>
+                            <p class="text-muted">
+                            Terwujudnya siswa yang beriman, bertaqwa, cerdas, terampil, berbudi pekerti luhur, dan berwawasan lingkungan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-2 border-light-subtle shadow-sm card-hover-3d">
+                    <div class="card-body p-4 p-lg-5">
+                        <div class="d-flex align-items-center justify-content-center rounded-circle bg-secondary text-white mb-4 icon-hover-rotate" style="width: 64px; height: 64px;">
+                        <i class="bi bi-eye-fill fs-2"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3">Misi</h3>
+                        <ul class="text-muted list-unstyled">
+                        <li><i class="bi bi-check-circle-fill text-primary me-2"></i>Meningkatkan iman dan taqwa</li>
+                        <li><i class="bi bi-check-circle-fill text-primary me-2"></i>Mengembangkan potensi akademik</li>
+                        <li><i class="bi bi-check-circle-fill text-primary me-2"></i>Membentuk karakter unggul</li>
+                        <li><i class="bi bi-check-circle-fill text-primary me-2"></i>Menciptakan lingkungan kondusif</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-2 border-light-subtle shadow-sm card-hover-3d">
+                <div class="card-body p-4 p-lg-5 text-center">
+                    <div class="d-flex align-items-center justify-content-center rounded-circle gradient-accent text-white mb-4 icon-hover-rotate" style="width: 64px; height: 64px;">
+                    <i class="bi bi-award-fill fs-2"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3">Prestasi</h3>
+                    <p class="text-muted">
+                    Meraih berbagai penghargaan tingkat kecamatan dan kota dalam bidang akademik, olahraga, dan seni.
+                    </p>
+                </div>
+                </div>
+            </div>
+            </div> 
+        </div>
+    </section>
+
+        <!-- Stats Section -->
+        <section class="mb-20 reveal">
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-blue-800 text-white p-6 rounded-lg shadow-lg stat-hover">
+                    <h3 class="text-4xl font-bold stat-number" data-target="1978">0</h3>
+                    <p class="mt-2 text-blue-200">Tahun Berdiri</p>
+                </div>
+                <div class="bg-blue-800 text-white p-6 rounded-lg shadow-lg stat-hover">
+                    <h3 class="text-4xl font-bold stat-number" data-target="593">0</h3>
+                    <p class="mt-2 text-blue-200">Peserta Didik</p>
+                </div>
+                <div class="bg-blue-800 text-white p-6 rounded-lg shadow-lg stat-hover">
+                    <h3 class="text-4xl font-bold stat-number" data-target="25">0</h3>
+                    <p class="mt-2 text-blue-200">Tenaga Pendidik</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section class="mb-20 reveal">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Informasi Terkini Seputar Sekolah</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover-3d card-hover-image-zoom">
+                    <img src="prestasi.png" alt="Berita 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">2 Oktober 2024</span>
+                        <h3 class="font-bold text-xl my-2">Prestasi Siswa di Tingkat Kecamatan</h3>
+                        <p class="text-gray-700 mb-4">Siswa kami meraih Juara 3 Oltrad Hadang Tingkat kecamatan.</p>
+                        <a href="#" class="text-blue-600 font-semibold hover:underline flex items-center group">
+                            Baca Selengkapnya 
+                            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- News Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover-3d card-hover-image-zoom">
+                    <img src="ANBK.PNG" alt="Berita 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">25 September 2025</span>
+                        <h3 class="font-bold text-xl my-2">Kegiatan ANBK</h3>
+                        <p class="text-gray-700 mb-4">Siswa Kelas 6 melaksanakan ANBK serentak</p>
+                        <a href="#" class="text-blue-600 font-semibold hover:underline flex items-center group">
+                            Baca Selengkapnya 
+                            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- News Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover-3d card-hover-image-zoom">
+                    <img src="Image/kemerdekaan.png" alt="Berita 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">17 Agustus 2025</span>
+                        <h3 class="font-bold text-xl my-2">Peringatan Hari Kemerdekaan</h3>
+                        <p class="text-gray-700 mb-4">Semarak perayaan 17 Agustus di lingkungan sekolah dengan berbagai lomba.</p>
+                        <a href="#" class="text-blue-600 font-semibold hover:underline flex items-center group">
+                            Baca Selengkapnya 
+                            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+             <div class="text-center mt-8">
+                <a href="#" class="text-blue-600 font-semibold hover:underline inline-flex items-center group">
+                    Lihat Semua Berita
+                    <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Kegiatan Carousel -->
+        <section class="mb-20 reveal">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Kegiatan Terbaru</h2>
+                <div>
+                    <button id="kegiatan-prev" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold p-2 rounded-full w-10 h-10 btn-hover-lift"><i class="fas fa-arrow-left"></i></button>
+                    <button id="kegiatan-next" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold p-2 rounded-full w-10 h-10 btn-hover-lift"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div id="kegiatan-carousel" class="carousel-container flex overflow-x-auto gap-8 scroll-smooth">
+                <!-- Carousel items -->
+                 <div class="flex-none w-80 bg-white rounded-lg shadow-lg overflow-hidden carousel-item-hover card-hover-image-zoom">
+                    <img src="Image/lomba-bulan-bahasa.png" class="w-full h-48 object-cover">
+                    <div class="p-4"><h3 class="font-bold text-lg">Lomba Bulan Bahasa</h3><p class="text-sm text-gray-600">Membangun karakter dan spiritualitas.</p></div>
+                </div>
+                <div class="flex-none w-80 bg-white rounded-lg shadow-lg overflow-hidden carousel-item-hover card-hover-image-zoom">
+                    <img src="Image/skrining.png" class="w-full h-48 object-cover">
+                    <div class="p-4"><h3 class="font-bold text-lg">Skrining CO</h3><p class="text-sm text-gray-600">Skrining CO yang diadakan oleh Puskesmas Kecamatan Cimanggis</p></div>
+                </div>
+                <div class="flex-none w-80 bg-white rounded-lg shadow-lg overflow-hidden carousel-item-hover card-hover-image-zoom">
+                    <img src="Image/penanaman.png" class="w-full h-48 object-cover">
+                    <div class="p-4"><h3 class="font-bold text-lg">Penanaman Pohon</h3><p class="text-sm text-gray-600">Penanaman pohon dalam rangka Hardiknas tahun 2024</p></div>
+                </div>
+                <div class="flex-none w-80 bg-white rounded-lg shadow-lg overflow-hidden carousel-item-hover card-hover-image-zoom">
+                    <img src="Image/pesta.jpg" class="w-full h-48 object-cover">
+                    <div class="p-4"><h3 class="font-bold text-lg">Pesta Anak Super Kids</h3><p class="text-sm text-gray-600">Siswa dan siswi Kristen SDN Curug 2 Cimanggis mengikuti kegiatan: Pesta Anak Super Kids "Bersama Tuhan Aku Bisa" di GBI Kamboja Kota Depok<p>
+                    </div>
+                </div>
+                 <div class="flex-none w-80 bg-white rounded-lg shadow-lg overflow-hidden carousel-item-hover card-hover-image-zoom">
+                    <img src="Image/pesantren.png" class="w-full h-48 object-cover">
+                    <div class="p-4"><h3 class="font-bold text-lg">Pesantren Kilat</h3><p class="text-sm text-gray-600">Pesantren Kilat Ramadhan dan Buka Puasa Bersama</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Alumni Testimonial -->
+        <section class="bg-gray-100 rounded-lg p-12 text-center reveal">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Apa Kata Alumni?</h2>
+            <div class="relative max-w-2xl mx-auto">
+                 <div class="testimonial-hover bg-white p-8 rounded-lg shadow-md">
+                    <img src="Image/foto noven.jpg" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white shadow-md">
+                    <p class="text-gray-600 italic mb-4">"Pendidikan di SDN Curug 2 sangat berkualitas, guru-gurunya sabar dan fasilitasnya lengkap. Saya bangga menjadi alumni."</p>
+                    <h4 class="font-bold text-lg">Dianwan Noven Nur Fauzian</h4>
+                    <p class="text-sm text-gray-500">Alumni Angkatan 2017</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Contact Section -->
+    <section id="contact" class="py-2 bg-light">
+        <div class="container">
+            <div class="text-center mb-5 scroll-reveal">
+                <h2 class="display-5 fw-bold mb-3">Hubungi Kami</h2>
+                <p class="lead text-muted">Untuk informasi lebih lanjut, silakan hubungi kami</p>
+            </div>
+            <div class="row g-3 justify-content-center" id="contact-container">
+                <!-- Contact cards will be inserted here by JavaScript -->
+            </div>
+            <div class="mt-5 scroll-reveal-scale">
+                <div class="card overflow-hidden card-hover-glow">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3521.102913540207!2d106.8742711099596!3d-6.379402593584252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69eb62ab21ba4f%3A0x1c0695effb15372!2sSDN%20Curug%202%20Cimanggis!5e1!3m2!1sen!2sid!4v1761791456134!5m2!1sen!2sid" 
+                        height="450" 
+                        class="d-block mx-auto" 
+                        style="border:0; width: 80%;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <img src="logo-sd.png" class="h-10 md:h-12 mr-2 icon-hover-rotate" alt="Logo SDN Curug 2">
+                        SDN Curug 2
+                    </h3>
+                    <p class="text-gray-400">Jl. Raya Curug, Cimanggis, Depok, Jawa Barat</p>
+                    <p class="text-gray-400">info@sdncurug2.sch.id</p>
+                    <p class="text-gray-400">(021) 874-1234</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Tautan Cepat</h4>
+                    <ul>
+                        <li class="mb-2"><a href="#" class="text-gray-400 footer-link-hover">Tentang Kami</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 footer-link-hover">Pendaftaran</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 footer-link-hover">Berita</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 footer-link-hover">Karir</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Program Unggulan</h4>
+                    <ul>
+                        <li class="mb-2"><a href="#" class="text-gray-400 footer-link-hover">Tahfidz Quran</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 footer-link-hover">Literasi Digital</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 footer-link-hover">Pramuka</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 footer-link-hover">Seni Budaya</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Ikuti Kami</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 social-icon-hover"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 social-icon-hover"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 social-icon-hover"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 social-icon-hover"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="mt-6">
+                        <h5 class="font-medium mb-2">Berlangganan Newsletter</h5>
+                        <div class="flex">
+                            <input type="email" placeholder="Email Anda" class="px-3 py-2 bg-gray-700 text-white rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 rounded-r btn-hover-lift transition-colors">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">
+                <p>&copy; 2025 SDN Curug 2 Cimanggis Depok. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // Contact Data
+            const contactData = [
+                { icon: 'bi-geo-alt-fill', title: 'Alamat', content: 'Jl. Raya Curug, Cimanggis, Kota Depok, Jawa Barat 16451' },
+                { icon: 'bi-telephone-fill', title: 'Telepon', content: '(021) 8740-xxxx' },
+                { icon: 'bi-envelope-fill', title: 'Email', content: 'sdncurug2@gmail.com' }
+            ];
+            const contactContainer = document.getElementById('contact-container');
+            contactData.forEach(item => {
+                contactContainer.innerHTML += `
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card h-100 text-center border-2 border-light-subtle shadow-sm contact-card-hover">
+                            <div class="card-body p-4">
+                                <div class="d-inline-flex align-items-center justify-content-center rounded-circle gradient-primary text-white mb-3 contact-icon" style="width: 56px; height: 56px;">
+                                    <i class="${item.icon} fs-4"></i>
+                                </div>
+                                <h3 class="h5 fw-bold mb-2">${item.title}</h3>
+                                <p class="text-muted small">${item.content}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            // Scroll animations
+            const reveal = () => {
+                const reveals = document.querySelectorAll('.reveal');
+                for (let i = 0; i < reveals.length; i++) {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = reveals[i].getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveals[i].classList.add('active');
+                    } else {
+                        // reveals[i].classList.remove('active'); // Uncomment to re-trigger animation on scroll up
+                    }
+                }
+            };
+            window.addEventListener('scroll', reveal);
+            reveal(); // initial check
+
+            // Stats counter animation
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const animateStat = (element) => {
+                const target = +element.getAttribute('data-target');
+                const duration = 2000; // 2 seconds
+                const stepTime = 20;
+                const totalSteps = duration / stepTime;
+                const increment = target / totalSteps;
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    element.innerText = Math.floor(current).toLocaleString('id-ID');
+                    if (current >= target) {
+                        clearInterval(timer);
+                        element.innerText = target.toLocaleString('id-ID');
+                    }
+                }, stepTime);
+                 element.parentElement.classList.add('counted');
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.parentElement.classList.contains('counted')) {
+                         animateStat(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            statNumbers.forEach(number => {
+                 observer.observe(number);
+            });
+
+
+            // Kegiatan Carousel
+            const carousel = document.getElementById('kegiatan-carousel');
+            const prevBtn = document.getElementById('kegiatan-prev');
+            const nextBtn = document.getElementById('kegiatan-next');
+            
+            if(carousel) {
+                const scrollStep = 320 + 32; // card width + gap
+
+                nextBtn.addEventListener('click', () => {
+                    carousel.scrollBy({ left: scrollStep, behavior: 'smooth' });
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    carousel.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
